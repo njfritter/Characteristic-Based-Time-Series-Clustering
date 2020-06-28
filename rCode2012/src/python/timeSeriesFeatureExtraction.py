@@ -264,7 +264,7 @@ def calculate_measures(x):
     
     # Adjust data
     # Unfortunately it looks like frequency is calculated a different way in the decompose function
-    # Thus there are users for which this function is evaulated when 'seasonality' is null
+    # Thus there may be data for which this function is evaulated when 'seasonality' is null
     # Going to add an extra check to make sure to not evaluate this if all the values are null
     #print(decomp_x['seasonality'])
     if freq > 1 and (not decomp_x['seasonality'].isnull().all()):
@@ -388,7 +388,7 @@ def calculate_measures(x):
     Q = bpvalue[-1] / (N*max_lag)
     fQ = f2_transformation(Q,7.53,0.103)
 
-    # Nonlinearity (add try/except block to capture USER IDs where this doesn't work)
+    # Nonlinearity (add try/except block to capture data where this doesn't work)
     # (THIS REQUIRES THE TIMESERIES OBJECT VERSION OF OUR DATA)
     try:
         adj_x_contiguous = na_contiguous(adj_x)

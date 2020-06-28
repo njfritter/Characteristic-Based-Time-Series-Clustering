@@ -653,7 +653,7 @@ def time_series_raw_feature_extraction(univariate_ts_data,index_col,date_col,day
     return initial_raw_feature_dct
 
 # Main function for use to input univariate time series data and return time series features
-def main():
+def main(analysis_data,date_col,days_of_data,days_of_missing_data,fill_function,fill_percentile,le_time_periods,trans_parameter,max_time_lag,smoothing_factor,min_adjustment_val):
     
     ## Get raw time series features ##
     # There is an OPTIONAL visualization analysis that can to be done as an intermediate step
