@@ -1,6 +1,6 @@
 # Characteristic Based Time Series Clustering Analysis
 
-This work is inspired by the following paper:
+This work is inspired by the following paper ([link to paper on Rob's website](https://robjhyndman.com/publications/ts-clustering/) and [link to Researchgate article](https://www.researchgate.net/publication/220451959_Characteristic-Based_Clustering_for_Time_Series_Data):
 
 ```
 "Characteristic-based clustering for time series data"
@@ -12,7 +12,7 @@ Xiaozhe Wang, Kate A Smith, Rob J Hyndman
 
 In this repo I will be showcasing my work in attempting to turn the above paper into Python code for general use in extracting features from time series data and using them as inputs to various time series clustering methods.
 
-I realized after beginning that the R code had been linked in the following blog [post|https://www.r-bloggers.com/measuring-time-series-characteristics/]. I have also turned this code into Python for comparison to my original code.
+I realized after beginning that the R code had been linked in the following blog [post](https://www.r-bloggers.com/measuring-time-series-characteristics/). I have also turned this code into Python for comparison to my original code.
 
 ## Automatic Time Series Feature Extraction Packages
 
