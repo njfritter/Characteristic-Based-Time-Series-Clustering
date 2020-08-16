@@ -1,6 +1,12 @@
 # This code is my attempt at turning the original 2006 paper on time series clustering into Python code
 # Even though some of my attempted calculations ended up quite off from the results of the R code posted in 2012, they generated decent clusters ()
 
+### VISUALIZATION SPECIFIC IMPORTS ###
+# Doing this first to avoid errors
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
+
 ### GENERAL IMPORTS ###
 import pandas as pd
 import numpy as np
@@ -81,11 +87,11 @@ def compute_mean_median_and_plot(data,date_col):
 
 def filter_out_indices(data,index_col,date_col,days_of_data,days_of_missing_data,col):
     # This function filters out indices that have more than "days_of_missing_data" missing in the "col" column
-    num_unique_indices_before = len(get_unique_indices(data))
+    num_unique_indices_before = len(get_unique_indices(data,index_col))
     data_ind = data.groupby([index_col]).agg({col: 'count'}) > (days_of_data - days_of_missing_data)
     data_ind_filtered = data_ind.loc[data_ind[col] == True,:].reset_index()
     data_filtered = data.loc[data[index_col].isin(data_ind_filtered[index_col])].sort_values(by=[index_col,date_col])
-    num_unique_indices_after = len(get_unique_indices(data_filtered))
+    num_unique_indices_after = len(get_unique_indices(data_filtered,index_col))
     print('%s of %s indices filtered out' % (num_unique_indices_before - num_unique_indices_after, num_unique_indices_before))
     
     return data_filtered
@@ -95,7 +101,7 @@ def fill_missing_values(data,index_col,function,percentile=None):
     # This must be done before the raw feature extraction, as we need full data points for this to work
     # The function passed MUST be an actual Python function (i.e. mean(), median(), np.percentile, etc)
     filled_data = pd.DataFrame(columns=data.columns)
-    for index in get_unique_indices(data):
+    for index in get_unique_indices(data,index_col):
         subset_df = data.loc[data[index_col] == index,:]
         if percentile:
             subset_df = subset_df.fillna(function(subset_df,percentile))
@@ -107,7 +113,7 @@ def fill_missing_values(data,index_col,function,percentile=None):
 def create_df_subset_dict(data,index_col):
     # Turns dataframe into dict of Index column-Data combinations
     df_subset_dict = {}
-    data_unique_ids = get_unique_ids(data)
+    data_unique_ids = get_unique_ids(data,index_col)
     for i in range(0,len(data_unique_ids)):
         df_subset = data.loc[data[index_col] == data_unique_ids[i],:]
         df_subset_dict[i] = df_subset
@@ -636,7 +642,7 @@ def time_series_raw_feature_extraction(univariate_ts_data,index_col,date_col,day
     
     # Get unique index values
     data = univariate_ts_data
-    unique_indices = get_unique_indices(data)
+    unique_indices = get_unique_indices(data,index_col)
     
     # Get analysis column
     index_and_date_cols = [index_col,date_col]
@@ -653,12 +659,12 @@ def time_series_raw_feature_extraction(univariate_ts_data,index_col,date_col,day
     return initial_raw_feature_dct
 
 # Main function for use to input univariate time series data and return time series features
-def main(analysis_data,date_col,days_of_data,days_of_missing_data,fill_function,fill_percentile,le_time_periods,trans_parameter,max_time_lag,smoothing_factor,min_adjustment_val):
+def main(analysis_data,index_col,date_col,days_of_data,days_of_missing_data,fill_function,fill_percentile,le_time_periods,trans_parameter,max_time_lag,smoothing_factor,min_adjustment_val):
     
     ## Get raw time series features ##
     # There is an OPTIONAL visualization analysis that can to be done as an intermediate step
     # Before the final features can be obtained
-    time_series_raw_feature_dct = time_series_raw_feature_extraction(analysis_data,date_col,days_of_data,days_of_missing_data,fill_function,fill_percentile,le_time_periods,trans_parameter,max_time_lag,smoothing_factor,min_adjustment_val)
+    time_series_raw_feature_dct = time_series_raw_feature_extraction(analysis_data,index_col,date_col,days_of_data,days_of_missing_data,fill_function,fill_percentile,le_time_periods,trans_parameter,max_time_lag,smoothing_factor,min_adjustment_val)
 
     ## Get final non-standardized time series features ##
     # FEATURES STILL TO BE EXTRACTED: Self-similiarity (raw), Non-linearity (raw/TSA)
