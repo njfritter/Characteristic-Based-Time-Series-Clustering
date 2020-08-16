@@ -80,3 +80,5 @@ for file in filenames:
         'labels': labels,
         'mapped_labels': mapped_labels,
     }
+
+    print(subject_dct)
