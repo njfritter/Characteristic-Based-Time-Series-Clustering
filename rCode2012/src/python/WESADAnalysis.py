@@ -4,7 +4,7 @@ Introducing WESAD, a multimodal dataset for Wearable Stress and Affect Detection
 In 2018 International Conference on Multimodal Interaction (ICMI â€™18), October 16â€“20, 2018, Boulder, CO, USA. ACM, New York, NY, USA, 9 pages.
 '''
 # Example script analyzing Wearable Stress and Affect Detection (WESAD) Dataset from UCI Machine Learning Repository
-# https://archive.ics.uci.edu/ml/datasets/Activity+Recognition+from+Single+Chest-Mounted+Accelerometer
+# https://archive.ics.uci.edu/ml/datasets/WESAD+%28Wearable+Stress+and+Affect+Detection%29#
 
 # Import directories
 import os
