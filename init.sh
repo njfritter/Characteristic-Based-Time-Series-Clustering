@@ -11,10 +11,10 @@ pip3 install git+https://github.com/compmonks/SOMPY.git
 pip3 install ipdb==0.8.1
 
 """
-# OPTIONAL: Download WESAD data via cURL (can take up to 15 minutes, so ask user if they just want to download file themselves)
+# Download WESAD data via cURL (can take up to 15 minutes, so ask user if they just want to download file themselves)
 # The data that will be analyzed is packaged in pickle files for each subject (and each > 1GB each)
-# Uploading this data to Github is cumbersome and bad practice, so I combined the data myself and uploaded the finish product using combine_wesad_data.py
-# If you would like to get the raw data to look at yourself enter 'yes' below
+# Uploading this data to Github is cumbersome and bad practice, so it will need to be downloaded via script
+# You are also welcome to visit the link mentioned and download the data yourself (will probably be faster)
 """
 
 # First method: use 'read' command (https://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script)
