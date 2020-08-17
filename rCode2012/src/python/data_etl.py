@@ -30,7 +30,7 @@ def get_processed_wesad_data():
 
     # Read in WESAD datasets by subject and unpickle
     subject_dct = {}
-    path = 'data/WESAD'
+    path = '../../../data/WESAD'
     filenames = glob.glob(os.path.join(path,'*/*.pkl'))
     for file in filenames:
         # Had to use 'latin1' as the encoding due to Python 2/3 pickle incompatibility
